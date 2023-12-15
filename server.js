@@ -4,28 +4,21 @@ if (process.env.NODE_ENV !== "production") {
 
 const express = require("express")
 const app = express()
-const expressLayouts = require("express-ejs-layouts")
+const path = require("path")
 const port = process.env.PORT ?? 6969
 
-const indexRouter = require("./routes/index")
-
+const usersRouter = require("./routes/users")
 app.set("view engine", "ejs")
 app.set("views", __dirname + "/views")
-app.set("layout", "layouts/layout")
-app.use(expressLayouts)
+
+app.use("/users", usersRouter)
+
+app.get("/users", (req, res) => {
+    let indexPath = path.join(__dirname, "public", "index.html")
+    res.sendFile(indexPath)
+})
+
 app.use(express.static("public"))
-
-const mongoose = require("mongoose")
-mongoose.connect(process.env.DATABASE_URL)
-
-const db = mongoose.connection
-db.on("error", err => console.error(err))
-db.once("open", () => console.log("Connected to mongoose !"))
-
-
-
-
-app.use("/", indexRouter)
 
 app.listen(port, (err) => {
     if (err) {

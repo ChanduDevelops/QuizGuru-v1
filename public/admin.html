@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0">
+        <title>Admin</title>
+        <link rel="stylesheet"
+              href="./css/admin.css">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+        <header class="header">
+            <a href="#"
+               class="logo">QuizGuru : Admin</a>
+
+            <nav class="navbar">
+                <a href="./logout.html"><i class="fa fa-sign-out"></i> Logout</a>
+            </nav>
+        </header>
+        <main class="main">
+            <div class="form-container">
+                <h1 class="form-heading">Insert data</h1>
+                <form action=""
+                      method="post">
+
+                    <div class="categories">
+                        <label for="category">
+                            Category : </label>
+                        <select name="category"
+                                id="category">
+                            <option value="select"
+                                    selected>select</option>
+                            <option value="arithmetic">Arithmetic</option>
+                            <option value="quantitative">Quantitative</option>
+                            <option value="reasoning">Reasoning</option>
+                            <option value="verbal">Verbal</option>
+                            <option value="gk">GK</option>
+                            <option value="random">Random</option>
+                        </select>
+                    </div>
+
+                    <div class="levels">
+                        <label for="level">Level : </label>
+                        <select name="level"
+                                id="level">
+                            <option value="select"
+                                    selected>select</option>
+                            <option value="easy">Easy</option>
+                            <option value="medium">Medium</option>
+                            <option value="hard">Hard</option>
+                        </select>
+                    </div>
+
+                    <div class="qsn-div">
+                        <label for="qsn">Question : </label>
+                        <textarea name="qsn"
+                                  id="qsn"
+                                  rows="3"
+                                  cols="10"></textarea>
+                    </div>
+
+                    <div class="options">
+                        <div class="option-a">
+                            <label for="a">Option A : </label>
+                            <input type="text"
+                                   name="a"
+                                   id="a"
+                                   class="opt">
+                        </div>
+
+
+                        <div class="option-b">
+                            <label for="b">Option B : </label>
+                            <input type="text"
+                                   name="b"
+                                   id="b"
+                                   class="opt">
+                        </div>
+
+                        <div class="option-c">
+                            <label for="c">Option C : </label>
+                            <input type="text"
+                                   name="c"
+                                   id="c"
+                                   class="opt">
+                        </div>
+
+                        <div class="option-d">
+                            <label for="d">Option D : </label>
+                            <input type="text"
+                                   name="d"
+                                   id="d"
+                                   class="opt">
+                        </div>
+
+                        <div class="correct-ans">
+                            <label for="ans">Answer : </label>
+                            <select name="ans"
+                                    id="ans">
+                                <option value="select"
+                                        selected>select</option>
+                                <option value="a">A</option>
+                                <option value="b">B</option>
+                                <option value="c">C</option>
+                                <option value="d">D</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="upload">
+                        <button type="submit"
+                                id="submit-btn">Upload</button>
+                    </div>
+                </form>
+            </div>
+            <div class="notification close">
+                New notification
+            </div>
+        </main>
+        <script src="./js/notification.js"></script>
+        <script src="./js/upload.js"></script>
+    </body>
+
+</html>

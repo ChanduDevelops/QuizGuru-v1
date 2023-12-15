@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0">
+        <title>QuizGuru</title>
+        <link rel="stylesheet"
+              href="./css/form.css">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+        <header class="header">
+            <a href="#"
+               class="logo">QuizGuru</a>
+
+            <nav class="navbar">
+                <ul>
+                    <li>
+                        <a href="./login.html">Login</a>
+                    </li>
+                    <li>
+                        <a href="./signup.html">SignUp</a>
+                    </li>
+                </ul>
+
+            </nav>
+        </header>
+        <main class="main">
+            <section class="form-container">
+                <h1 class="form-heading">Register</h1>
+                <form action=""
+                      method="post"
+                      id="form">
+                    <label for="usrnm"><i class="fa fa-user"></i>Usernme</label>
+                    <input type="text"
+                           name="username"
+                           id="usrnm"
+                           class="input-field"
+                           autocomplete="off"
+                           placeholder="Enter Username">
+                    <label for="email"><i class="fa fa-envelope"></i>Email</label>
+                    <input type="text"
+                           name="email"
+                           id="email"
+                           class="input-field"
+                           autocomplete="off"
+                           placeholder="Enter Email">
+
+                    <label for="pswd"><i class="fa fa-lock"></i>Password</label>
+                    <input type="password"
+                           name="password"
+                           id="pswd"
+                           class="input-field"
+                           placeholder="Enter Password">
+
+                    <p>Already have an account?
+                        <a href="./login.html">Login</a>
+                    <div class="btn-div">
+                        <button type="submit"
+                                class="submit-btn">Submit</button>
+                    </div>
+
+                    </p>
+                </form>
+            </section>
+            <div class="notification close">
+                New notification
+            </div>
+        </main>
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="./js/notification.js"></script>
+        <script src="./js/signup.js"></script>
+    </body>
+
+</html>
