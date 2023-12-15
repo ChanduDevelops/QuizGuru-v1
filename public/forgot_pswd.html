@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0">
+        <title>QuizGuru</title>
+        <link rel="stylesheet"
+              href="./css/form.css">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    </head>
+
+    <body>
+        <header class="header">
+            <a href="#"
+               class="logo">QuizGuru</a>
+
+            <nav class="navbar">
+                <ul>
+                    <li>
+                        <a href="./login.html">Login</a>
+                    </li>
+                    <li>
+                        <a href="./signup.html">SignUp</a>
+                    </li>
+                </ul>
+
+            </nav>
+        </header>
+        <main class="main">
+            <section class="form-container">
+                <h1 class="form-heading">Reset Password</h1>
+                <form action="forgot_pswd"
+                      method="post"
+                      id="form">
+
+                    <label for="email"><i class="fa fa-envelope"></i>Email</label>
+                    <input type="text"
+                           required
+                           name="email"
+                           id="email"
+                           class="input-field"
+                           autocomplete="off"
+                           placeholder="Enter email">
+
+                    <label for="pswd"><i class="fa fa-lock"></i>Password</label>
+                    <input type="password"
+                           required
+                           name="password"
+                           id="pswd"
+                           class="input-field"
+                           placeholder="Enter new password">
+
+                    <label for="pswd2"><i class="fa fa-lock"></i>Confirm password</label>
+                    <input type="password"
+                           name="password2"
+                           id="pswd2"
+                           class="input-field"
+                           placeholder="Re-enter new password">
+
+                    <div class="login-signup">
+                        <a href="./login.html">
+                            Login <i class="fa fa-external-link"></i>
+                        </a>
+                        <a href="./signup.html">
+                            Create Account <i class="fa fa-external-link"></i>
+                        </a>
+                    </div>
+                    <div class="btn-div">
+                        <button type="submit"
+                                class="submit-btn">Submit</button>
+                    </div>
+
+                    </p>
+                </form>
+            </section>
+            <div class="notification close">
+                New notification
+            </div>
+        </main>
+        <script src="./js/notification.js"></script>
+        <script src="./js/form.js"></script>
+    </body>
+
+</html>
