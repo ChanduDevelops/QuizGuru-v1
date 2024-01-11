@@ -88,7 +88,6 @@ document.querySelector(".options").addEventListener("click", (e) => {
     }
 })
 
-
 const goFullScreen = () => {
     header.classList.remove("hdr-visible");
     header.classList.add("hdr-hidden");
