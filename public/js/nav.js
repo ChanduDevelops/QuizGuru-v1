@@ -1,5 +1,5 @@
-let profileIcon = document.getElementById('profile-icon');
-let profileDiv = document.querySelector('.profile-div');
+const profileIcon = document.getElementById('profile-icon');
+const profileDiv = document.querySelector('.profile-div');
 
 function toggleProfileDiv(e) {
     profileDiv.classList.toggle("pd-hidden");
@@ -15,9 +15,9 @@ document.addEventListener("click", (e) => {
     }
 })
 
-let menuIcon = document.querySelector(".menu-icon");
-let sideNav = document.querySelector(".side-nav");
-let sideNavIcon = document.querySelector(".ic");
+const menuIcon = document.querySelector(".menu-icon");
+const sideNav = document.querySelector(".side-nav");
+const sideNavIcon = document.querySelector(".ic");
 
 function toggleNavbar(e) {
     sideNav.classList.toggle("sn-visible");
@@ -39,20 +39,20 @@ document.addEventListener("click", (e) => {
 })
 
 
-function logout() {
-    let signoutBtns = document.querySelectorAll(".signout");
-    signoutBtns.forEach(btn => {
-        btn.addEventListener("click", () => {
-            window.location.href = "/logout";
-        });
-    });
-}
-logout();
+// function logout() {
+//     const signoutBtns = document.querySelectorAll(".signout");
+//     signoutBtns.forEach(btn => {
+//         btn.addEventListener("click", () => {
+//             window.location.href = "/logout";
+//         });
+//     });
+// }
+// logout();
 
 
-let shareBtn = document.getElementById("share");
+const shareBtn = document.getElementById("share");
 shareBtn.addEventListener("click", () => {
-    let url = window.location.href;
+    const url = window.location.href;
     var msg = null;
     navigator.clipboard.writeText(url)
         .then(() => {
@@ -65,3 +65,68 @@ shareBtn.addEventListener("click", () => {
         })
 });
 
+const signoutBtn = document.querySelector(".signout")
+signoutBtn.addEventListener("click", (e) => {
+    e.preventDefault()
+
+    // const currentUrl = "http://127.0.0.1:2020/users/"
+    // fetch(currentUrl, {
+    //     method: "GET",
+    //     headers: {
+    //         "Content-Type": "application/json"
+    //     },
+    //     body: JSON.stringify({
+    //         // get currentuser and remove from sessionstorage 
+    //         // currentUser: sessionStorage.get()
+    //     })
+    // })
+})
+
+
+const Tests = {
+    "Arithmetic": "arithmetic",
+    "Quantitative": "quantitative",
+    "Reasoning": "reasoning",
+    "Verbal": "verbal",
+    "GK": "current_affairs",
+    "Current Affairs": "current_affairs",
+    "Random Test": "random",
+}
+var itemLinks = document.querySelectorAll(".side-nav .level")
+itemLinks.forEach(itemLink => {
+    itemLink.addEventListener("click", (e) => {
+        e.preventDefault()
+
+        var testLevel = itemLink?.textContent.toLowerCase()
+        console.log(testLevel)
+
+
+        var levelParent = itemLink.parentNode.parentNode.parentNode
+        var testCategory = Tests[levelParent.querySelector(".item-heading")?.innerText]
+        sendTestData(testLevel, testCategory)
+    })
+})
+
+function sendTestData(testLevel, testCategory) {
+    fetch(`http://127.0.0.1:2020/users/main`, {
+        method: 'POST',
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            testCategory: testCategory,
+            testLevel: testLevel
+        })
+    }).then(res => {
+        if (res.ok)
+            return res.json()
+        else
+            throw new Error("Response not OK")
+    }).then(data => {
+        if (data?.redirect) {
+            window.location.href = data.redirect
+        }
+    }).catch(e => {
+        notify(e, "red")
+    })
+}

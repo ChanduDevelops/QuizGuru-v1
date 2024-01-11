@@ -2,21 +2,38 @@ if (process.env.NODE_ENV !== "production") {
     require("dotenv").config()
 }
 
+const mongoose = require("mongoose")
+mongoose.connect(
+    process.env.DATABASE_URL,
+    {
+        useNewUrlParser: true,
+        useUnifiedTopology: true
+    }).then(() => {
+        console.log("Connected to mongoose!")
+    }).catch(e => {
+        console.error(e.message)
+    })
+
+// const db = mongoose.connection
+// db.on("error", err => console.error(err))
+// db.once("open", () => console.log("Connected to mongoose!"))
+
 const express = require("express")
 const app = express()
-const path = require("path")
 const port = process.env.PORT ?? 6969
 
 const usersRouter = require("./routes/users")
 app.set("view engine", "ejs")
 app.set("views", __dirname + "/views")
 
+
 app.use("/users", usersRouter)
 
-app.get("/users", (req, res) => {
-    let indexPath = path.join(__dirname, "public", "index.html")
-    res.sendFile(indexPath)
+app.get("/", (req, res) => {
+    res.redirect("/index.html")
 })
+
+
 
 app.use(express.static("public"))
 

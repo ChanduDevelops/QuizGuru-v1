@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport"
+              content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet"
+              href="./css/nav.css">
+        <!-- <link rel="stylesheet"
+              href="../static/form.css"> -->
+        <link rel="stylesheet"
+              href="./css/report.css">
+        <link rel="stylesheet"
+              href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <title>Report</title>
+    </head>
+
+    <body>
+        <header class="header">
+            <aside class="side-nav sn-hidden">
+                <ul class="nav-container">
+                    <li>
+                        <a href="/users/main"
+                           class="item">
+                            <span class="icon">
+                                <i class="fa fa-home"></i>
+                            </span>
+                            Home
+                        </a>
+                    </li>
+                    <li class="item">
+                        <span class="icon">
+                            <i class="fa fa-calculator"></i>
+                        </span>
+                        <span class="item-heading">Arithmetic</span>
+                        <i class="fa fa-angle-right icon-expand"></i>
+
+                        <ul class="dropdown">
+                            <li>
+                                <a href="#"
+                                   class="level easy">Easy</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   class="level medium">Medium</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   class="level hard">Hard</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="item">
+                        <span class="icon">
+                            <i class="fa fa-bar-chart"></i>
+                        </span>
+                        <span class="item-heading">Quantitative</span>
+                        <i class="fa fa-angle-right icon-expand"></i>
+
+                        <ul class="dropdown">
+                            <li>
+                                <a href="#"
+                                   class="level easy">Easy</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   class="level medium">Medium</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   class="level hard">Hard</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="item">
+                        <span class="icon">
+                            <i class="fa fa-lightbulb-o"></i>
+                        </span>
+                        <span class="item-heading">Reasoning</span>
+                        <i class="fa fa-angle-right icon-expand"></i>
+
+                        <ul class="dropdown">
+                            <li>
+                                <a href="#"
+                                   class="level easy">Easy</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   class="level medium">Medium</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   class="level hard">Hard</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="item">
+                        <span class="icon">
+                            <i class="fa fa-language"></i>
+                        </span>
+                        <span class="item-heading">Verbal</span>
+                        <i class="fa fa-angle-right icon-expand"></i>
+                        <ul class="dropdown">
+                            <li>
+                                <a href="#"
+                                   class="level easy">Easy</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   class="level medium">Medium</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   class="level hard">Hard</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="item">
+                        <span class="icon">
+                            <i class="fa fa-newspaper-o"></i>
+                        </span>
+                        <span class="item-heading">GK</span>
+                        <i class="fa fa-angle-right icon-expand"></i>
+                        <ul class="dropdown">
+                            <li>
+                                <a href="#"
+                                   class="level easy">Easy</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   class="level medium">Medium</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   class="level hard">Hard</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="item">
+                        <span class="icon">
+                            <i class="fa fa-random"></i>
+                        </span>
+                        <span class="item-heading">Random Test</span>
+                        <i class="fa fa-angle-right icon-expand"></i>
+                        <ul class="dropdown">
+                            <li>
+                                <a href="#"
+                                   class="level easy">Easy</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   class="level medium">Medium</a>
+                            </li>
+                            <li>
+                                <a href="#"
+                                   class="level hard">Hard</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="item"
+                        id="share">
+                        <span class="icon">
+                            <i class="fa fa-link"></i>
+                        </span>
+                        Share friend
+                    </li>
+                    <li>
+                        <a href="/users/contactus"
+                           class="item">
+                            <span class="icon">
+                                <i class="fa fa-bug"></i>
+                            </span>
+                            Report
+                        </a>
+                    </li>
+                    <li>
+                        <button type="button"
+                                class="signout nav-signout">Sign out</button>
+                    </li>
+            </aside>
+            <div class="menu-and-logo">
+                <span class="menu-icon">
+                    <i class="fa fa-navicon ic"></i>
+                </span>
+                <a href="/users/main"
+                   class="logo">QuizGuru</a>
+            </div>
+
+            <nav class="navbar">
+                <ul>
+                    <li><a href="/users/main"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="/users/about"><i class="fa fa-info-circle"></i> About Us</a></li>
+                    <li><a href="/users/contactus"><i class="fa fa-envelope"></i> Contact Us</a></li>
+
+                    <li>
+                        <div id="profile-icon">
+                            <i class="fa fa-user-circle-o"></i>
+                        </div>
+                        <div class="profile-div pd-hidden">
+                            <a href="#"
+                               class="profile">Profile <i class="fa fa-angle-right"></i></a>
+                            <button type="button"
+                                    class="signout">Sign out</button>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </header>
+        <main class="main">
+            <section class="report-container">
+                <h1 class="report-heading">Analysis Report</h1>
+                <div class="graph">
+                    <div class="pie-chart">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                    <div class="report-section">
+                        <p class="correct-ans">
+                            <span class="icon green">&#10004;</span>
+                            Correct answers
+                            <span class="count"
+                                  id="crt-cnt">0</span>
+                        </p>
+                        <p class="wrong-ans">
+                            <span class="icon red">&#10006;</span>
+                            Wrong answers
+                            <span class="count"
+                                  id="wrng-cnt">0</span>
+                        </p>
+                        <p class="un-ans">
+                            <i class="fa fa-question icon yellow"></i>
+                            Not answered
+                            <span class="count"
+                                  id="unans-cnt">0</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="end-msg">You performed well !!</div>
+            </section>
+
+            <div class="notification close">
+                New notification
+            </div>
+        </main>
+
+        <footer class="footer">
+            <ul>
+                <li class="copyright">&#169; 2023 by QuizGuru | All Rights Reserved.</li>
+                <li><a href="/users/about">About Us</a></li>
+            </ul>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="./js/report.js"></script>
+        <script src="./js/notification.js"></script>
+        <script src="./js/nav.js"></script>
+    </body>
+
+</html>
