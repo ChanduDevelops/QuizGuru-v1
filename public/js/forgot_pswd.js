@@ -62,7 +62,7 @@ form.addEventListener("submit", (e) => {
                 throw new Error()
             }
         }).catch(err => {
-            notify("Something went wrong!", "red")
+            notify("Something went wrong! Please try again", "red")
         })
     }
 })

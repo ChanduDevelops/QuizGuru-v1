@@ -22,7 +22,7 @@ loginForm.addEventListener("submit", (e) => {
             if (response.ok || response.status === 401 || response.status === 404) {
                 return response.json()
             } else {
-                throw new Error("Something went wrong!")
+                throw new Error("Something went wrong! Please try again")
             }
         }).then((data) => {
             if (data?.redirect && data.success && !data.msg) {

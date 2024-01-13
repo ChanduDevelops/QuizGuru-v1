@@ -49,7 +49,7 @@ signupForm.addEventListener("submit", (e) => {
                 })
             }
             else {
-                throw new Error("Something went wrong!")
+                throw new Error("Something went wrong! Please try again")
             }
         }).then((data) => {
             if (data?.redirect) {

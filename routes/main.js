@@ -1,6 +1,5 @@
 const express = require('express')
 const session = require("express-session")
-const authenticateUser = require("../authenticate")
 const router = express.Router()
 
 router.use(session({
@@ -21,13 +20,4 @@ router.route("/")
     })
 
 
-function authenticate(re, res, next) {
-    if (req.session?.user && req.query?.isValidated) {
-        next()
-    }
-    else {
-        res.redirect("/users/login")
-    }
-}
-
-module.exports = { router }
+module.exports = router

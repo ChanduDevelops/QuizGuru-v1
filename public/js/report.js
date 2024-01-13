@@ -76,4 +76,3 @@ function displayEndMsg(chartData) {
         endMsg.innerHTML = "--- " + "Better luck next time" + " ---"
     }
 }
-// displayEndMsg()
