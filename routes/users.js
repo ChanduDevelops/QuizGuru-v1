@@ -36,6 +36,10 @@ router.use("/signup", signupRouter)
 const forgot_pswdRouter = require("./forgot_pswd")
 router.use("/forgot_pswd", forgot_pswdRouter)
 
+const contactUsRouter = require("./contact_us")
+router.use("/contactus", contactUsRouter)
+
+
 router.use(express.static("public"));
 
 module.exports = router
