@@ -155,7 +155,6 @@ const clearSelection = () => {
     if (selectedOption) {
         selectedOption = null
     }
-    // displayDetails()
 }
 
 const fetchQsns = () => {
@@ -193,13 +192,12 @@ const fetchQsns = () => {
         }).then(data => {
             if (data?.bitPack) {
                 qsnSet = data.bitPack
-                console.log(qsnSet.length);
+
                 qsnSet = qsnSet.map(qsn => {
                     qsn.checked = false
                     qsn.userAnswer = null
                     return qsn
                 })
-                // console.log(qsnSet[0]);
             }
         }).catch(e => {
             notify(e.message, "red")
@@ -255,7 +253,6 @@ clearBtn.addEventListener("click", clearSelection)
 //     getprevQsn(currentQsnNo)
 //     currentQsnNo--
 // })
-
 
 const NextBtn = document.getElementById("next-btn")
 NextBtn.addEventListener("click", () => {

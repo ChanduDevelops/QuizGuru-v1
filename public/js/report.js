@@ -3,7 +3,6 @@ var chartData = {
     labels: ["correct answers", "wrong answers", "not attemmpted"],
     data: [],
     colors: ["green", "red", "yellow"]
-
 }
 
 window.onload = function (e) {
@@ -16,8 +15,11 @@ window.onload = function (e) {
         })
         .then(res => {
             if (res.ok) {
-                return res.json()
+                x = res.json()
+                console.log(x);
+                return x
             } else {
+
                 throw new Error("Something went wrong!")
             }
         })

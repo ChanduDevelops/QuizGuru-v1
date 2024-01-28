@@ -39,6 +39,11 @@ router.use("/forgot_pswd", forgot_pswdRouter)
 const contactUsRouter = require("./contact_us")
 router.use("/contactus", contactUsRouter)
 
+router
+    .route("/about")
+    .get((re, res) => {
+        res.redirect("/users/about.html")
+    })
 
 router.use(express.static("public"));
 

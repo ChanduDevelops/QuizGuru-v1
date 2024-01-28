@@ -68,18 +68,7 @@ shareBtn.addEventListener("click", () => {
 const signoutBtn = document.querySelector(".signout")
 signoutBtn.addEventListener("click", (e) => {
     e.preventDefault()
-
-    // const currentUrl = "http://127.0.0.1:2020/users/"
-    // fetch(currentUrl, {
-    //     method: "GET",
-    //     headers: {
-    //         "Content-Type": "application/json"
-    //     },
-    //     body: JSON.stringify({
-    //         // get currentuser and remove from sessionstorage 
-    //         // currentUser: sessionStorage.get()
-    //     })
-    // })
+    window.location.href = "http://127.0.0.1:2020/users/login.html"
 })
 
 
