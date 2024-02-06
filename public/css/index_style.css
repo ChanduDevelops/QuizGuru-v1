@@ -36,7 +36,6 @@ body {
     z-index: 100;
 }
 
-
 .logo {
     font-size: 38px;
     font-weight: 700;
@@ -81,7 +80,7 @@ body {
 /* navbar ended  */
 
 /* main start  */
-
+ 
 .main {
     position: relative;
     top: 4.25em;
@@ -89,30 +88,27 @@ body {
     height: 90.75vh;
     /* background: url('./bg-image.png') no-repeat; */
     background: var(--bg1-clr);
-
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+gap: 1em;
 }
 
 .title h1 q {
     color: #fff;
     font-size: 1.9em;
     font-weight: normal;
-    /* text-shadow: 2px 2px 5px #fff; */
 }
 
 .title h1 {
     color: #fff;
 }
 
-.title {
-    position: absolute;
-    top: 22.5%;
-    left: 1.5%;
-}
 
 .btn {
     position: relative;
-    top: 70%;
-    left: 15%;
+    top:2em;
+    left: 4em;
     padding: .25em 1.5em;
     font-size: 32px;
     color: white;
@@ -135,8 +131,6 @@ body {
 
 .float-image {
     position: relative;
-    top: 8%;
-    left: 47%;
     width: 55em;
     height: 33em;
     font-size: 14px;

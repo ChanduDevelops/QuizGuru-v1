@@ -4,9 +4,7 @@ const router = express.Router()
 
 
 router.get("/", (req, res) => {
-    let reqPath = path.join(__dirname, "../", "public", "about.html")
-    console.log(reqPath);
-    res.sendFile(reqPath)
+    res.redirect("/users/index.html")
 })
 router.use(express.static("public"))
 

@@ -4,19 +4,21 @@ const router = express.Router()
 
 const bitsModel = require("../models/bits")
 
-const getBitPack = (testCategory, testLevel) => {
-    return bitsModel.find({
-        category: testCategory,
-        level: testLevel
-    }).then(result => {
+const getBitPack = async (testCategory, testLevel) => {
+    try {
+        const result = await bitsModel.find({
+            category: testCategory,
+            level: testLevel
+        }).limit(5)
         if (result && result.length > 0) {
             return result
         } else {
             return null
         }
-    }).catch(e => {
+    } catch (e) {
         console.error("cannot get bitpack")
-    })
+        throw e
+    }
 }
 
 router.route("/")
@@ -30,17 +32,21 @@ router.route("/")
             res.redirect("/users/main")
         }
     })
-    .post((req, res) => {
+    .post(async (req, res) => {
         if (req.body?.testCategory && req.body?.testLevel) {
-            getBitPack(req.body?.testCategory, req.body?.testLevel)
-                .then(bitPack => {
-                    if (bitPack === null) {
-                        res.status(404).json({ status: false, redirect: "/users/main" })
-                    } else {
-                        res.status(200).json({ status: true, bitPack: bitPack, redirect: "/users/qsns.html" })
-                    }
-                })
-        } else {
+            try {
+                const bitPack = await getBitPack(req.body?.testCategory, req.body?.testLevel)
+                if (bitPack === null) {
+                    res.status(404).json({ status: false, redirect: "/users/main" })
+                } else {
+                    res.status(200).json({ status: true, bitPack: bitPack, redirect: "/users/qsns.html" })
+                }
+            } catch (e) {
+                res.status(500).json({ status: false, redirect: "/users/main" })
+                console.error("something went wrong in database");
+            }
+        }
+        else {
             res.redirect("/users/main")
         }
     })

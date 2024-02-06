@@ -100,21 +100,20 @@ const goFullScreen = () => {
 
     qsnMain.classList.remove("main-hidden");
     qsnMain.classList.add("main-visible");
-    // console.log("qsn-main open");
 
     var elem = document.documentElement;
-    // if (!document.fullscreenElement && !document.mozFullScreenElement &&
-    //     !document.webkitFullscreenElement && !document.msFullscreenElement) {
-    //     if (elem.requestFullscreen) {
-    //         elem.requestFullscreen();
-    //     } else if (elem.msRequestFullscreen) {
-    //         elem.msRequestFullscreen();
-    //     } else if (elem.mozRequestFullScreen) {
-    //         elem.mozRequestFullScreen();
-    //     } else if (elem.webkitRequestFullscreen) {
-    //         elem.webkitRequestFullscreen();
-    //     }
-    // }
+    if (!document.fullscreenElement && !document.mozFullScreenElement &&
+        !document.webkitFullscreenElement && !document.msFullscreenElement) {
+        if (elem.requestFullscreen) {
+            elem.requestFullscreen();
+        } else if (elem.msRequestFullscreen) {
+            elem.msRequestFullscreen();
+        } else if (elem.mozRequestFullScreen) {
+            elem.mozRequestFullScreen();
+        } else if (elem.webkitRequestFullscreen) {
+            elem.webkitRequestFullscreen();
+        }
+    }
 }
 
 const exitFullScreen = () => {
@@ -143,7 +142,6 @@ const exitFullScreen = () => {
 
     noticeContainer.classList.remove("nc-hidden");
     noticeContainer.classList.add("nc-visible");
-    // console.log("main-visible");
 
 }
 
@@ -230,6 +228,10 @@ const renderQsn = qsnNo => {
 }
 
 const getNextQsn = qsnNo => {
+    if (qsnNo === qsnSet.length - 1) {
+        notify("This is the last question!", "orange")
+        return
+    }
     renderQsn(qsnNo + 1)
 }
 
@@ -261,11 +263,6 @@ NextBtn.addEventListener("click", () => {
     currentQsn.userAnswer = selectedOption
     currentQsn.checked = true
 
-    if (currentQsnNo === qsnSet.length - 1) {
-        notify("This is the last question!", "orange")
-        return
-    }
-
     getNextQsn(currentQsnNo)
     currentQsnNo++
 })
@@ -296,14 +293,12 @@ submitTest.addEventListener("click", () => {
                 if (qsn.userAnswer) {
                     if (qsn.userAnswer === qsn.ans)
                         correctAnswerCount++
-                    else if (!qsn.userAnswer && qsn.userAnswer !== qsn.ans)
-                        wrongAnswerCount++
                 } else
                     unattemptedCount++
             })
-            console.log(correctAnswerCount, wrongAnswerCount, unattemptedCount)
-            exitFullScreen()
 
+            exitFullScreen()
+            wrongAnswerCount = qsnSet.length - (correctAnswerCount + unattemptedCount)
             fetch(`http://127.0.0.1:2020/users/report`,
                 {
                     method: "POST",

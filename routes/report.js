@@ -1,10 +1,10 @@
 const express = require('express')
 const router = express.Router()
 
-var [correctAnswerCount, wrongAnswerCount, unattemptedCount] = [0, 0, 20]
 
 router.route("/")
     .get((req, res) => {
+        console.log(req.session.correctAnswerCount, req.session.wrongAnswerCount, req.session.unattemptedCount);
         var [correctAnswerCount, wrongAnswerCount, unattemptedCount] = [req.session.correctAnswerCount, req.session.wrongAnswerCount, req.session.unattemptedCount]
 
         res.status(200).json({
@@ -16,6 +16,7 @@ router.route("/")
         })
     })
     .post((req, res) => {
+        console.log(req.body);
         req.session.correctAnswerCount = req.body?.correctAnswerCount
         req.session.wrongAnswerCount = req.body?.wrongAnswerCount
         req.session.unattemptedCount = req.body?.unattemptedCount
