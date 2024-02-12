@@ -162,15 +162,13 @@ body {
     left: 0;
     width: 100%;
     height: 4.25em;
-    padding: 15px 100px;
+    padding: 10px 100px;
     background-color: var(--main-clr);
     display: flex;
     align-items: center;
     justify-content: space-between;
     z-index: 100;
 }
-
-.hdr-visible {}
 
 .hdr-hidden {
     display: none;
