@@ -208,6 +208,7 @@ body {
 .navbar ul {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .navbar li>a {
