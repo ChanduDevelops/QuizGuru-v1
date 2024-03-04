@@ -8,12 +8,18 @@
     color: #fff;
 }
 
+.main{
+    position: relative;
+    height: 91.4vh;
+}
+
 .greet {
     padding: 1em 0 .5em 2em;
 }
 
 .row {
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: space-evenly;
     margin: 2em 0 2em 2em;
@@ -26,7 +32,7 @@
     background: linear-gradient(165deg, var(--main-clr), #8b09e2);
     border-radius: 10px;
     height: 13em;
-    margin: 0 1em;
+    margin: 1.5rem 1rem;
     padding: 3em;
     min-width: 23em;
     display: flex;

@@ -15,6 +15,8 @@ var option3 = document.querySelector(".option3")
 var option4 = document.querySelector(".option4")
 var ans = null
 var selectedOption
+var isTimedOut = false
+
 
 
 var currentQsn
@@ -113,6 +115,7 @@ const goFullScreen = () => {
         } else if (elem.webkitRequestFullscreen) {
             elem.webkitRequestFullscreen();
         }
+        startTimer()
     }
 }
 
@@ -243,8 +246,39 @@ const getprevQsn = qsnNo => {
     renderQsn(qsnNo - 1)
 }
 
-const timer = () => {
-    const remainingTime = 90 * 60
+const startTimer = () => {
+    const remainingTime = 2 * 60 * 1000//90 * 60 * 1000
+    var countDownDate = new Date().getTime() + remainingTime
+
+    var x = setInterval(() => {
+        var now = new Date().getTime();
+        var distance = countDownDate - now;
+
+        var x = setInterval(function () {
+            var now = new Date().getTime();
+            var distance = countDownDate - now;
+
+            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Display the result in the element with id="timer"
+            document.querySelector(".timer").innerHTML = (hours < 10 ? "0" : "") + hours + ":"
+                + (minutes < 10 ? "0" : "") + minutes + ":"
+                + (seconds < 10 ? "0" : "") + seconds;
+
+            if (distance < 0) {
+                clearInterval(x);
+                isTimedOut = true
+                submitTestButton.click()
+            }
+
+            if (distance < 60 * 1000) { // less than 1 minute
+                document.querySelector(".timer").style.color = "red";
+            }
+        }, 1000)
+
+    })
 }
 
 const clearBtn = document.getElementById("clear-btn");
@@ -276,8 +310,45 @@ function displayDetails() {
     console.log("unatt", unattemptedCount)
 }
 
-const submitTest = document.getElementById("end-test")
-submitTest.addEventListener("click", () => {
+const submitTestButton = document.getElementById("end-test")
+submitTestButton.addEventListener("click", () => {
+    function claculateScore() {
+        let [correctAnswerCount, wrongAnswerCount, unattemptedCount] = [0, 0, 0]
+        qsnSet.forEach(qsn => {
+            console.log("ans", qsn.ans, "   userans", qsn.userAnswer)
+            if (qsn.userAnswer) {
+                if (qsn.userAnswer === qsn.ans)
+                    correctAnswerCount++
+            } else
+                unattemptedCount++
+        })
+
+        exitFullScreen()
+        wrongAnswerCount = qsnSet.length - (correctAnswerCount + unattemptedCount)
+        fetch(`http://127.0.0.1:2020/users/report`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    correctAnswerCount,
+                    wrongAnswerCount,
+                    unattemptedCount
+                })
+            }).then(res => {
+                if (res.status === 200) {
+                    window.location.href = "/users/report.html"
+                } else {
+                    throw new Error("Something went wrong, Try again later")
+                }
+            }).catch(e => {
+                notify(e, "red")
+            })
+    }
+    if (isTimedOut) {
+        claculateScore()
+    }
     Swal.fire({
         title: "Alert!",
         text: "Do you really want to submit the test?",
@@ -287,38 +358,7 @@ submitTest.addEventListener("click", () => {
         confirmButtonText: "Yes, End test"
     }).then((result) => {
         if (result.isConfirmed) {
-            let [correctAnswerCount, wrongAnswerCount, unattemptedCount] = [0, 0, 0]
-            qsnSet.forEach(qsn => {
-                console.log("ans", qsn.ans, "   userans", qsn.userAnswer)
-                if (qsn.userAnswer) {
-                    if (qsn.userAnswer === qsn.ans)
-                        correctAnswerCount++
-                } else
-                    unattemptedCount++
-            })
-
-            exitFullScreen()
-            wrongAnswerCount = qsnSet.length - (correctAnswerCount + unattemptedCount)
-            fetch(`http://127.0.0.1:2020/users/report`,
-                {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json"
-                    },
-                    body: JSON.stringify({
-                        correctAnswerCount,
-                        wrongAnswerCount,
-                        unattemptedCount
-                    })
-                }).then(res => {
-                    if (res.status === 200) {
-                        window.location.href = "/users/report.html"
-                    } else {
-                        throw new Error("Something went wrong, Try again later")
-                    }
-                }).catch(e => {
-                    notify(e, "red")
-                })
+            claculateScore()
         }
     })
 })

@@ -15,7 +15,7 @@ router.route("/")
         })
     })
     .post((req, res) => {
-        console.log(req.body);
+        // console.log(req.body);
         req.session.correctAnswerCount = req.body?.correctAnswerCount
         req.session.wrongAnswerCount = req.body?.wrongAnswerCount
         req.session.unattemptedCount = req.body?.unattemptedCount
