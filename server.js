@@ -45,3 +45,5 @@ app.listen(port, (err) => {
 // DATABASE_URL = mongodb+srv://20981a05b1:<password>@quiz.1hqfwot.mongodb.net/?retryWrites=true&w=majority&appName=Quiz
 
 // SESSION_SECRET = ''
+
+//operations on db is performing on test collection bydefault. needs to update it to quiz collection
