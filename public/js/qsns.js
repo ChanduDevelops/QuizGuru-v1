@@ -1,111 +1,117 @@
-const startBtn = document.querySelector(".start-btn")
-const header = document.querySelector(".header")
-const ncMain = document.querySelector(".nc-main")
-const noticeContainer = document.querySelector(".notice-container")
+const startBtn = document.querySelector('.start-btn');
+const header = document.querySelector('.header');
+const ncMain = document.querySelector('.nc-main');
+const noticeContainer = document.querySelector('.notice-container');
 
-const qsnMain = document.querySelector(".qsns-main")
+const qsnMain = document.querySelector('.qsns-main');
 
-var category = document.querySelector(".category")
-var levelType = document.querySelector(".level-type")
-var qsn = document.querySelector(".qsn")
+var category = document.querySelector('.category');
+var levelType = document.querySelector('.level-type');
+var qsn = document.querySelector('.qsn');
 
-var option1 = document.querySelector(".option1")
-var option2 = document.querySelector(".option2")
-var option3 = document.querySelector(".option3")
-var option4 = document.querySelector(".option4")
-var ans = null
-var selectedOption
-var isTimedOut = false
+var option1 = document.querySelector('.option1');
+var option2 = document.querySelector('.option2');
+var option3 = document.querySelector('.option3');
+var option4 = document.querySelector('.option4');
+var ans = null;
+var selectedOption;
+var isTimedOut = false;
 
-
-
-var currentQsn
-var currentQsnNo = 0
-var qsnSet = []
-
+var currentQsn;
+var currentQsnNo = 0;
+var qsnSet = [];
 
 window.onload = function () {
-    startBtn.classList.remove("start-enable")
-    fetchQsns()
+    startBtn.classList.remove('start-enable');
+    fetchQsns();
 
-    let seconds = 14
+    let seconds = 14;
     let timer = setInterval(() => {
         if (seconds < 9) {
-            startBtn.innerHTML = "00:0" + seconds
+            startBtn.innerHTML = '00:0' + seconds;
         } else {
-            startBtn.innerHTML = "00:" + seconds
+            startBtn.innerHTML = '00:' + seconds;
         }
         if (seconds < 0) {
-            enableStartButton()
-            clearInterval(timer)
-            startBtn.innerHTML = "Start"
+            enableStartButton();
+            clearInterval(timer);
+            startBtn.innerHTML = 'Start';
         }
-        seconds--
-    }, 1000)
-}
+        seconds--;
+    }, 1000);
+};
 
 function enableStartButton() {
-    startBtn.classList.add("start-enable")
+    startBtn.classList.add('start-enable');
 
-    startBtn.addEventListener("click", () => {
+    startBtn.addEventListener('click', () => {
         Swal.fire({
-            title: "Alert!",
-            text: "You are about to enter full screen mode!",
+            title: 'Alert!',
+            text: 'You are about to enter full screen mode!',
             showCancelButton: true,
-            confirmButtonColor: "#3085d6",
-            cancelButtonColor: "#d33",
-            confirmButtonText: "Yes, start test"
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, start test',
         }).then((result) => {
             if (result.isConfirmed) {
-                goFullScreen()
-                renderQsn(currentQsnNo)
+                goFullScreen();
+                renderQsn(currentQsnNo);
             }
-        })
-    })
+        });
+    });
 }
 
-document.querySelector(".options").addEventListener("click", (e) => {
-    let target = e.target
+document.querySelector('.options').addEventListener('click', (e) => {
+    let target = e.target;
     if (target.tagName === 'INPUT') {
         target = target.parentNode;
     }
 
     if (target && target.matches('.opt1, .opt2, .opt3, .opt4')) {
-        let radioButton = target.querySelector('.option')
+        let radioButton = target.querySelector('.option');
         if (radioButton) {
-            radioButton.checked = true
+            radioButton.checked = true;
             switch (radioButton.id) {
-                case "option1": selectedOption = "a"
-                    break
-                case "option2": selectedOption = "b"
-                    break
-                case "option3": selectedOption = "c"
-                    break
-                case "option4": selectedOption = "d"
-                    break
-                default: selectedOption = null
-                    break
+                case 'option1':
+                    selectedOption = 'a';
+                    break;
+                case 'option2':
+                    selectedOption = 'b';
+                    break;
+                case 'option3':
+                    selectedOption = 'c';
+                    break;
+                case 'option4':
+                    selectedOption = 'd';
+                    break;
+                default:
+                    selectedOption = null;
+                    break;
             }
         }
     }
-})
+});
 
 const goFullScreen = () => {
-    header.classList.remove("hdr-visible");
-    header.classList.add("hdr-hidden");
+    header.classList.remove('hdr-visible');
+    header.classList.add('hdr-hidden');
 
-    ncMain.classList.remove("main-visible");
-    ncMain.classList.add("main-hidden");
+    ncMain.classList.remove('main-visible');
+    ncMain.classList.add('main-hidden');
 
-    noticeContainer.classList.remove("nc-visible");
-    noticeContainer.classList.add("nc-hidden");
+    noticeContainer.classList.remove('nc-visible');
+    noticeContainer.classList.add('nc-hidden');
 
-    qsnMain.classList.remove("main-hidden");
-    qsnMain.classList.add("main-visible");
+    qsnMain.classList.remove('main-hidden');
+    qsnMain.classList.add('main-visible');
 
     var elem = document.documentElement;
-    if (!document.fullscreenElement && !document.mozFullScreenElement &&
-        !document.webkitFullscreenElement && !document.msFullscreenElement) {
+    if (
+        !document.fullscreenElement &&
+        !document.mozFullScreenElement &&
+        !document.webkitFullscreenElement &&
+        !document.msFullscreenElement
+    ) {
         if (elem.requestFullscreen) {
             elem.requestFullscreen();
         } else if (elem.msRequestFullscreen) {
@@ -115,14 +121,18 @@ const goFullScreen = () => {
         } else if (elem.webkitRequestFullscreen) {
             elem.webkitRequestFullscreen();
         }
-        startTimer()
+        startTimer();
     }
-}
+};
 
 const exitFullScreen = () => {
     var elem = document.documentElement;
-    if (document.fullscreenElement || document.mozFullScreenElement ||
-        document.webkitFullscreenElement || document.msFullscreenElement) {
+    if (
+        document.fullscreenElement ||
+        document.mozFullScreenElement ||
+        document.webkitFullscreenElement ||
+        document.msFullscreenElement
+    ) {
         if (document.exitFullscreen) {
             document.exitFullscreen();
         } else if (document.msExitFullscreen) {
@@ -134,155 +144,158 @@ const exitFullScreen = () => {
         }
     }
 
-    qsnMain.classList.remove("main-visible");
-    qsnMain.classList.add("main-hidden");
+    qsnMain.classList.remove('main-visible');
+    qsnMain.classList.add('main-hidden');
 
-    header.classList.remove("hdr-hidden");
-    header.classList.add("hdr-visible");
+    header.classList.remove('hdr-hidden');
+    header.classList.add('hdr-visible');
 
-    ncMain.classList.remove("main-hidden");
-    ncMain.classList.add("main-visible");
+    ncMain.classList.remove('main-hidden');
+    ncMain.classList.add('main-visible');
 
-    noticeContainer.classList.remove("nc-hidden");
-    noticeContainer.classList.add("nc-visible");
-
-}
+    noticeContainer.classList.remove('nc-hidden');
+    noticeContainer.classList.add('nc-visible');
+};
 
 const clearSelection = () => {
-    var ele = document.querySelectorAll(".option");
+    var ele = document.querySelectorAll('.option');
 
-    for (var i = 0; i < ele.length; i++)
-        ele[i].checked = false
+    for (var i = 0; i < ele.length; i++) ele[i].checked = false;
     if (selectedOption) {
-        selectedOption = null
+        selectedOption = null;
     }
-}
+};
 
 const fetchQsns = () => {
-    var urlParams = new URLSearchParams(window.location.search)
-    var testCategory = urlParams.get("testCategory")
-    var testLevel = urlParams.get("testLevel")
+    var urlParams = new URLSearchParams(window.location.search);
+    var testCategory = urlParams.get('testCategory');
+    var testLevel = urlParams.get('testLevel');
 
-    let currentUrl = `http://127.0.0.1:2020/users/qsns?testCategory=${testCategory}&testLevel=${testLevel}`
+    let currentUrl = `http://127.0.0.1:2020/users/qsns?testCategory=${testCategory}&testLevel=${testLevel}`;
     fetch(currentUrl, {
-        method: "GET",
+        method: 'GET',
         headers: {
-            "Content-Type": "application/json"
+            'Content-Type': 'application/json',
         },
-    })
+    });
 
     if (!testCategory || !testLevel) {
-        window.location.href = "/users/main"
-        return
+        window.location.href = '/users/main';
+        return;
     } else {
-        fetch("http://127.0.0.1:2020/users/qsns", {
-            method: "POST",
+        fetch('http://127.0.0.1:2020/users/qsns', {
+            method: 'POST',
             headers: {
-                "Content-Type": "application/json"
+                'Content-Type': 'application/json',
             },
             body: JSON.stringify({
                 testCategory,
-                testLevel
-            })
-        }).then(res => {
-            if (res.ok) {
-                return res.json()
-            } else {
-                throw new Error("Questions not found! Try again later!!")
-            }
-        }).then(data => {
-            if (data?.bitPack) {
-                qsnSet = data.bitPack
-
-                qsnSet = qsnSet.map(qsn => {
-                    qsn.checked = false
-                    qsn.userAnswer = null
-                    return qsn
-                })
-            }
-        }).catch(e => {
-            notify(e.message, "red")
-            setTimeout(() => {
-                window.location.href = "/users/main"
-            }, 2000)
-
+                testLevel,
+            }),
         })
+            .then((res) => {
+                if (res.ok) {
+                    return res.json();
+                } else {
+                    throw new Error('Questions not found! Try again later!!');
+                }
+            })
+            .then((data) => {
+                if (data?.bitPack) {
+                    qsnSet = data.bitPack;
+
+                    qsnSet = qsnSet.map((qsn) => {
+                        qsn.checked = false;
+                        qsn.userAnswer = null;
+                        return qsn;
+                    });
+                }
+            })
+            .catch((e) => {
+                notify(e.message, 'red');
+                setTimeout(() => {
+                    window.location.href = '/users/main';
+                }, 2000);
+            });
     }
-}
+};
 
-const renderQsn = qsnNo => {
-    clearSelection()
+const renderQsn = (qsnNo) => {
+    clearSelection();
 
-    let currentQsn = qsnSet[qsnNo]
+    let currentQsn = qsnSet[qsnNo];
 
-    let categoryText = currentQsn.category
-    category.textContent = categoryText.charAt(0).toUpperCase()
-        + categoryText.slice(1)
+    let categoryText = currentQsn.category;
+    category.textContent =
+        categoryText.charAt(0).toUpperCase() + categoryText.slice(1);
 
-    let levelText = currentQsn.level
-    levelType.textContent = levelText.charAt(0).toUpperCase() + levelText.slice(1)
+    let levelText = currentQsn.level;
+    levelType.textContent =
+        levelText.charAt(0).toUpperCase() + levelText.slice(1);
 
-    qsn.textContent = "Q. " + currentQsn.qsn
-    option1.textContent = currentQsn.a
-    option2.textContent = currentQsn.b
-    option3.textContent = currentQsn.c
-    option4.textContent = currentQsn.d
-    ans = qsnSet[qsnNo].ans
-}
+    qsn.textContent = 'Q. ' + currentQsn.qsn;
+    option1.textContent = currentQsn.a;
+    option2.textContent = currentQsn.b;
+    option3.textContent = currentQsn.c;
+    option4.textContent = currentQsn.d;
+    ans = qsnSet[qsnNo].ans;
+};
 
-const getNextQsn = qsnNo => {
+const getNextQsn = (qsnNo) => {
     if (qsnNo === qsnSet.length - 1) {
-        notify("This is the last question!", "orange")
-        return
+        notify('This is the last question!', 'orange');
+        return;
     }
-    renderQsn(qsnNo + 1)
-}
+    renderQsn(qsnNo + 1);
+};
 
-const getprevQsn = qsnNo => {
+const getprevQsn = (qsnNo) => {
     if (qsnNo === 0) {
-        notify("This is first question", "orange")
-        return
+        notify('This is first question', 'orange');
+        return;
     }
-    renderQsn(qsnNo - 1)
-}
+    renderQsn(qsnNo - 1);
+};
 
 const startTimer = () => {
-    const remainingTime = 2 * 60 * 1000//90 * 60 * 1000
-    var countDownDate = new Date().getTime() + remainingTime
+    const remainingTime = 2 * 60 * 1000; //90 * 60 * 1000
+    var countDownDate = new Date().getTime() + remainingTime;
 
-    var x = setInterval(() => {
+    var x = setInterval(function () {
         var now = new Date().getTime();
         var distance = countDownDate - now;
 
-        var x = setInterval(function () {
-            var now = new Date().getTime();
-            var distance = countDownDate - now;
+        var hours = Math.floor(
+            (distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60)
+        );
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        document.querySelector('.timer').innerHTML =
+            (hours < 10 ? '0' : '') +
+            hours +
+            ':' +
+            (minutes < 10 ? '0' : '') +
+            minutes +
+            ':' +
+            (seconds < 10 ? '0' : '') +
+            seconds;
 
-            // Display the result in the element with id="timer"
-            document.querySelector(".timer").innerHTML = (hours < 10 ? "0" : "") + hours + ":"
-                + (minutes < 10 ? "0" : "") + minutes + ":"
-                + (seconds < 10 ? "0" : "") + seconds;
+        if (distance < 0) {
+            clearInterval(x);
+            isTimedOut = true;
+            submitTestButton.click();
+        }
 
-            if (distance < 0) {
-                clearInterval(x);
-                isTimedOut = true
-                submitTestButton.click()
-            }
+        if (distance < 30 * 60 * 1000) {
+            //30 minutes
+            document.querySelector('.timer').style.color = 'red';
+        }
+    }, 1000);
+};
 
-            if (distance < 60 * 1000) { // less than 1 minute
-                document.querySelector(".timer").style.color = "red";
-            }
-        }, 1000)
-
-    })
-}
-
-const clearBtn = document.getElementById("clear-btn");
-clearBtn.addEventListener("click", clearSelection)
+const clearBtn = document.getElementById('clear-btn');
+clearBtn.addEventListener('click', clearSelection);
 
 // const prevoiusBtn = document.getElementById("prev-btn")
 // prevoiusBtn.addEventListener("click", () => {
@@ -290,76 +303,76 @@ clearBtn.addEventListener("click", clearSelection)
 //     currentQsnNo--
 // })
 
-const NextBtn = document.getElementById("next-btn")
-NextBtn.addEventListener("click", () => {
+const NextBtn = document.getElementById('next-btn');
+NextBtn.addEventListener('click', () => {
+    currentQsn = qsnSet[currentQsnNo];
+    currentQsn.userAnswer = selectedOption;
+    currentQsn.checked = true;
 
-    currentQsn = qsnSet[currentQsnNo]
-    currentQsn.userAnswer = selectedOption
-    currentQsn.checked = true
-
-    getNextQsn(currentQsnNo)
-    currentQsnNo++
-})
+    getNextQsn(currentQsnNo);
+    currentQsnNo++;
+});
 
 function displayDetails() {
-    console.log("qsn no", currentQsnNo)
+    console.log('qsn no', currentQsnNo);
 
-    console.log("attempted", attempted);
-    console.log("crct", correctAnswerCount)
-    console.log("wrong", wrongAnswerCount)
-    console.log("unatt", unattemptedCount)
+    console.log('attempted', attempted);
+    console.log('crct', correctAnswerCount);
+    console.log('wrong', wrongAnswerCount);
+    console.log('unatt', unattemptedCount);
 }
 
-const submitTestButton = document.getElementById("end-test")
-submitTestButton.addEventListener("click", () => {
+const submitTestButton = document.getElementById('end-test');
+submitTestButton.addEventListener('click', () => {
     function claculateScore() {
-        let [correctAnswerCount, wrongAnswerCount, unattemptedCount] = [0, 0, 0]
-        qsnSet.forEach(qsn => {
-            console.log("ans", qsn.ans, "   userans", qsn.userAnswer)
+        let [correctAnswerCount, wrongAnswerCount, unattemptedCount] = [
+            0, 0, 0,
+        ];
+        qsnSet.forEach((qsn) => {
+            console.log('ans', qsn.ans, '   userans', qsn.userAnswer);
             if (qsn.userAnswer) {
-                if (qsn.userAnswer === qsn.ans)
-                    correctAnswerCount++
-            } else
-                unattemptedCount++
-        })
+                if (qsn.userAnswer === qsn.ans) correctAnswerCount++;
+            } else unattemptedCount++;
+        });
 
-        exitFullScreen()
-        wrongAnswerCount = qsnSet.length - (correctAnswerCount + unattemptedCount)
-        fetch(`http://127.0.0.1:2020/users/report`,
-            {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    correctAnswerCount,
-                    wrongAnswerCount,
-                    unattemptedCount
-                })
-            }).then(res => {
+        exitFullScreen();
+        wrongAnswerCount =
+            qsnSet.length - (correctAnswerCount + unattemptedCount);
+        fetch(`http://127.0.0.1:2020/users/report`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                correctAnswerCount,
+                wrongAnswerCount,
+                unattemptedCount,
+            }),
+        })
+            .then((res) => {
                 if (res.status === 200) {
-                    window.location.href = "/users/report.html"
+                    window.location.href = '/users/report.html';
                 } else {
-                    throw new Error("Something went wrong, Try again later")
+                    throw new Error('Something went wrong, Try again later');
                 }
-            }).catch(e => {
-                notify(e, "red")
             })
+            .catch((e) => {
+                notify(e, 'red');
+            });
     }
     if (isTimedOut) {
-        claculateScore()
+        claculateScore();
     }
     Swal.fire({
-        title: "Alert!",
-        text: "Do you really want to submit the test?",
+        title: 'Alert!',
+        text: 'Do you really want to submit the test?',
         showCancelButton: true,
-        confirmButtonColor: "red",
-        cancelButtonColor: "#357cb4",
-        confirmButtonText: "Yes, End test"
+        confirmButtonColor: 'red',
+        cancelButtonColor: '#357cb4',
+        confirmButtonText: 'Yes, End test',
     }).then((result) => {
         if (result.isConfirmed) {
-            claculateScore()
+            claculateScore();
         }
-    })
-})
-
+    });
+});
