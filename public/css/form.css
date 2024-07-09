@@ -200,19 +200,15 @@ textarea {
     top: 0;
     left: 0;
     content: '';
-    width: 100%;
+    width: 0;
     height: 100%;
     background: var(--main-clr);
-    border: 2px solis var(--main-clr);
-    transform-origin: left;
-    transform: translateX(-100%);
-    transition: transform .3s ease;
+    transition: width .3s ease;
     z-index: -1;
 }
 
 .submit-btn:hover::before {
-    transform-origin: right;
-    transform: translateX(0);
+    width: 100%;
 }
 
 .notification {

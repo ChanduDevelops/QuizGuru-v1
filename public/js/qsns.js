@@ -16,6 +16,7 @@ var option4 = document.querySelector('.option4');
 var ans = null;
 var selectedOption;
 var isTimedOut = false;
+const testDuration = 30; // in minutes
 
 var currentQsn;
 var currentQsnNo = 0;
@@ -258,7 +259,7 @@ const getprevQsn = (qsnNo) => {
 };
 
 const startTimer = () => {
-    const remainingTime = 2 * 60 * 1000; //90 * 60 * 1000
+    const remainingTime = testDuration * 60 * 1000;
     var countDownDate = new Date().getTime() + remainingTime;
 
     var x = setInterval(function () {
@@ -287,8 +288,8 @@ const startTimer = () => {
             submitTestButton.click();
         }
 
-        if (distance < 30 * 60 * 1000) {
-            //30 minutes
+        if (distance < 2 * 60 * 1000) {
+            // make timer red if time is less than 2 minutes
             document.querySelector('.timer').style.color = 'red';
         }
     }, 1000);
