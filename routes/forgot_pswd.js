@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const usersModel = require('../models/users');
+const { usersModel } = require('../models/bits.model.js');
 
 router
     .route('/')

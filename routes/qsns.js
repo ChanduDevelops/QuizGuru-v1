@@ -2,7 +2,7 @@ const express = require('express');
 const session = require('express-session');
 const router = express.Router();
 
-const bitsModel = require('../models/bits');
+const { bitsModel } = require('../models/bits.model');
 
 const getBitPack = async (testCategory, testLevel) => {
     console.log('qsns_page : retrieving bits');

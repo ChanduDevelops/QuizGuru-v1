@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
 
-const usersModel = require('../models/users');
+const { usersModel } = require('../models/bits.model');
 
 router
     .route('/')
