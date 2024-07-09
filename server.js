@@ -4,10 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const mongoose = require('mongoose');
 mongoose
-    .connect(process.env.DATABASE_URL, {
-        useNewUrlParser: true,
-        useUnifiedTopology: true,
-    })
+    .connect(process.env.DATABASE_URL)
     .then(() => {
         console.log('Connected to mongoose!');
     })
@@ -17,11 +14,9 @@ mongoose
 
 const express = require('express');
 const app = express();
-const port = process.env.PORT ?? 6969;
+const port = process.env.PORT ?? 3030;
 
 const usersRouter = require('./routes/users');
-app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
 
 app.use('/users', usersRouter);
 

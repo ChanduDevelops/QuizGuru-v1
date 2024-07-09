@@ -1,25 +1,32 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 
-
-router.route("/")
+router
+    .route('/')
     .get((req, res) => {
-        var [correctAnswerCount, wrongAnswerCount, unattemptedCount] = [req.session.correctAnswerCount, req.session.wrongAnswerCount, req.session.unattemptedCount]
+        console.log('report_page : get');
+
+        var [correctAnswerCount, wrongAnswerCount, unattemptedCount] = [
+            req.session.correctAnswerCount,
+            req.session.wrongAnswerCount,
+            req.session.unattemptedCount,
+        ];
 
         res.status(200).json({
             status: true,
             correctAnswerCount: correctAnswerCount,
             wrongAnswerCount: wrongAnswerCount,
             unattemptedCount: unattemptedCount,
-            redirect: "/users/report.html"
-        })
+            redirect: '/users/report.html',
+        });
     })
     .post((req, res) => {
-        // console.log(req.body);
-        req.session.correctAnswerCount = req.body?.correctAnswerCount
-        req.session.wrongAnswerCount = req.body?.wrongAnswerCount
-        req.session.unattemptedCount = req.body?.unattemptedCount
-        res.sendStatus(200)
-    })
+        console.log('report_page : post');
 
-module.exports = router
+        req.session.correctAnswerCount = req.body?.correctAnswerCount;
+        req.session.wrongAnswerCount = req.body?.wrongAnswerCount;
+        req.session.unattemptedCount = req.body?.unattemptedCount;
+        res.sendStatus(200);
+    });
+
+module.exports = router;

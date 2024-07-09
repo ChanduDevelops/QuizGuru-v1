@@ -5,6 +5,7 @@ const router = express.Router();
 const bitsModel = require('../models/bits');
 
 const getBitPack = async (testCategory, testLevel) => {
+    console.log('qsns_page : retrieving bits');
     try {
         const result = await bitsModel.find({
             category: testCategory,
@@ -16,7 +17,7 @@ const getBitPack = async (testCategory, testLevel) => {
             return null;
         }
     } catch (e) {
-        console.error('cannot get bitpack');
+        console.error('error getting bits');
         throw e;
     }
 };
@@ -24,6 +25,8 @@ const getBitPack = async (testCategory, testLevel) => {
 router
     .route('/')
     .get((req, res) => {
+        console.log('qsns_page : get');
+
         if (req.query?.testCategory && req.query?.testLevel) {
             res.redirect(
                 `/users/qsns.html?testCategory=${req.query.testCategory}&testLevel=${req.query.testLevel}`
@@ -37,6 +40,8 @@ router
         }
     })
     .post(async (req, res) => {
+        console.log('qsns_page : post');
+
         if (req.body?.testCategory && req.body?.testLevel) {
             try {
                 const bitPack = await getBitPack(

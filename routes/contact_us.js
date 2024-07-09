@@ -1,10 +1,10 @@
-const express = require('express')
-const router = express.Router()
+const express = require('express');
+const router = express.Router();
 
-router.route("/").
-    get((req, res) => {
-        res.redirect("contactus.html")
-    })
+router.route('/').get((req, res) => {
+    console.log('contact_page : get');
 
-module.exports = router
+    res.redirect('contactus.html');
+});
 
+module.exports = router;
