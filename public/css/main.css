@@ -8,9 +8,10 @@
     color: #fff;
 }
 
-.main{
+
+.main {
     position: relative;
-    height: 91.4vh;
+    height: 90.3vh;
 }
 
 .greet {
@@ -22,14 +23,14 @@
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-evenly;
-    margin: 2em 0 2em 2em;
-    padding: 1em;
+    margin-left: 2em;
+    padding-top: 1em;
     width: 95%;
 }
 
 .column {
     position: relative;
-    background: linear-gradient(165deg, var(--main-clr), #8b09e2);
+    background: linear-gradient(150deg, #00dbde, var(--main-clr), #8b09e2);
     border-radius: 10px;
     height: 13em;
     margin: 1.5rem 1rem;
