@@ -4,7 +4,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 const mongoose = require('mongoose');
 mongoose
-    .connect(process.env.DATABASE_URL)
+    .connect(process.env.MONGODB_URL)
     .then(() => {
         console.log('Connected to mongoose!');
     })
@@ -30,7 +30,7 @@ app.listen(port, (err) => {
     if (err) {
         console.error(err);
     } else {
-        console.log(`server listening at http://127.0.0.1:${port}`);
+        console.log(`server listening at ${port}`);
     }
 });
 
