@@ -8,13 +8,9 @@ const { usersModel } = require('../models/bits.model');
 router
     .route('/')
     .get((req, res) => {
-        console.log('signup_page : get');
-
         res.redirect('signup.html');
     })
     .post((req, res) => {
-        console.log('signup_page : post');
-
         const bodyData = req.body;
         const username = bodyData.username;
         const email = bodyData.email;

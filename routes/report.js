@@ -4,8 +4,6 @@ const router = express.Router();
 router
     .route('/')
     .get((req, res) => {
-        console.log('report_page : get');
-
         var [correctAnswerCount, wrongAnswerCount, unattemptedCount] = [
             req.session.correctAnswerCount,
             req.session.wrongAnswerCount,

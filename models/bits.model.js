@@ -30,5 +30,3 @@ const usersSchema = new mongoose.Schema({
 const usersModel = mongoose.model('users', usersSchema);
 
 module.exports = { usersModel, bitsModel };
-
-// db string => mongodb+srv://20981a05b1:<password>@quiz.1hqfwot.mongodb.net/?retryWrites=true&w=majority&appName=Quiz

@@ -5,13 +5,9 @@ const { usersModel } = require('../models/bits.model.js');
 router
     .route('/')
     .get((req, res) => {
-        console.log('forgot_pswd_page : get');
-
         res.redirect('forgot_pswd.html');
     })
     .put((req, res) => {
-        console.log('forgot_pswd_page : put');
-
         const bodyData = req.body;
         const userEmail = bodyData.email;
         const userPassword = bodyData.password;

@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const session = require('express-session');
+const requireAuth = require('../middleware/auth');
 const router = express.Router();
 
 router.use(bodyParser.json());
@@ -40,11 +41,10 @@ const contactUsRouter = require('./contact_us');
 router.use('/contactus', contactUsRouter);
 
 router.route('/about').get((re, res) => {
-    console.log('about_page : get');
-
     res.redirect('/users/about.html');
 });
 
+router.use(requireAuth);
 router.use(express.static('public'));
 
 module.exports = router;

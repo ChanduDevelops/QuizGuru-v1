@@ -10,12 +10,9 @@ router.use(bodyParser.urlencoded({ extended: true }));
 // display admin page
 router
     .get('/', (re, res) => {
-        console.log(`admin_page :  get`);
-
         res.render('admin.html');
     })
     .post('/', (req, res) => {
-        console.log('admin_page: post');
         const bodyData = req.body;
 
         bitsModel

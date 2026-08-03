@@ -27,13 +27,9 @@ const validateLogin = (userEmail, userPassword) => {
 router
     .route('/')
     .get((req, res) => {
-        console.log('login_page : get');
-
         res.redirect('login.html');
     })
     .post((req, res) => {
-        console.log('login_page : post');
-
         var isValidated = false;
         var isUserAdmin = false;
         const bodyData = req.body;
