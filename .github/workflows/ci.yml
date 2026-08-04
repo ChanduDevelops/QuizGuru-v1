@@ -1,0 +1,40 @@
+name: CI
+
+on:
+    pull_request:
+        branches: [main]
+
+jobs:
+    build-check:
+        runs-on: ubuntu-latest
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Set up Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: '20'
+                  cache: 'npm'
+
+            - name: Install dependencies
+              run: npm install
+
+            - name: Check for syntax errors in all JS files
+              run: |
+                  for file in $(find . -name "*.js" -not -path "./node_modules/*"); do
+                    node --check "$file"
+                  done
+
+            - name: Verify server boots without crashing
+              run: |
+                  timeout 5s node server.js || code=$?
+                  if [ "$code" -ne 124 ] && [ -n "$code" ]; then
+                    echo "Server crashed on startup"
+                    exit 1
+                  fi
+              env:
+                  MONGODB_URL: mongodb+srv://test:test@test.mongodb.net/test
+                  SESSION_SECRET: ci_test_secret
+                  PORT: 2020
